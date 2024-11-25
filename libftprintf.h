@@ -7,9 +7,10 @@
 #include <unistd.h>
 
 
-
-void ft_putchar(char c);
-void ft_putnbr(int nb);
-void ft_putstr(char *str);
+int ft_putchar(char c);
+int ft_putnbr(long nb);
+int ft_putstr(char *str);
+int ft_puthex(char c, int n);
+int check_address(unsigned long n);
 
 #endif

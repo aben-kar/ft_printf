@@ -26,17 +26,22 @@ int ft_putnbr_base(long nbr, char *base, int is_unsigned) {
     unsigned long num;
 
     // Check if the number is unsigned
-    if (is_unsigned) {
+    if (is_unsigned) 
+    {
         num = (unsigned long)nbr;
-    } else {
-        if (nbr < 0) {
+    } 
+    else 
+    {
+        if (nbr < 0) 
+        {
             len += ft_putchar('-'); // Add '-' for negative numbers
             num = -nbr;
-        } else {
+        } 
+        else 
+        {
             num = nbr;
         }
     }
-
     // Calculate the length of the base
     int base_len = 0;
     while (base[base_len]) {
@@ -102,11 +107,9 @@ int ft_printf(const char *format, ...) {
 
     return char_count;
 }
- 
 
-// Pour comparaison avec printf standard
 int main() {
-    //int count;
+    int count;
 
     // Test %c - Caractère unique
     // ft_printf("%c", 'A');
@@ -117,38 +120,25 @@ int main() {
     // // Test %s avec NULL
     //ft_printf("%s", NULL);
 
-    // // Test %p - Affichage de pointeur
-    // int i = 42;
-    // ft_printf("%p", &i);
+    // Test %p - Affichage de pointeur
+    int i = -16;
+    ft_printf("%p\n", &i);
+    printf("%p", &i);
 
     // // Test %d et %i - Entiers signés
-    int j = 1242;
-    ft_printf("%i\n", j);
-    printf("%i", j);
-    // // Test %u - Entiers non signés
-    // count = ft_printf("Test %%u: [%u]\n", 4294967295U); // Valeur max pour unsigned int
-    // printf("Expected: Test %%u: [4294967295]\n");
-    // printf("Returned count: %d\n\n", count);
+    // int j = 1242;
+    // ft_printf("%i\n", j);
+
+    // Test %u - Entiers non signés
+    // int k = 4294967295;
+    // ft_printf("%u", k);
 
     // // Test %x et %X - Hexadécimal
-    // count = ft_printf("Test %%x et %%X: [%x] [%X]\n", 255, 255);
-    // printf("Expected: Test %%x et %%X: [ff] [FF]\n");
-    // printf("Returned count: %d\n\n", count);
+    // int hex = 255;
+    // ft_printf("%X", hex);
 
     // // Test %%
-    // count = ft_printf("Test %%%%: [%%]\n");
-    // printf("Expected: Test %%%%: [%%]\n");
-    // printf("Returned count: %d\n\n", count);
-
-    // // Test combinaison de tous les types
-    // count = ft_printf("Combinaison: [%c] [%s] [%p] [%d] [%u] [%x] [%X] [%%%%]\n", 'Z', "Test String", &x, -2147483648, 12345U, 3735928559U, 3735928559U);
-    // printf("Expected: Combinaison: [Z] [Test String] [%p] [-2147483648] [12345] [deadbeef] [DEADBEEF] [%%]\n", (void *)&x);
-    // printf("Returned count: %d\n\n", count);
-
-    // // Test format invalide
-    // count = ft_printf("Test format invalide: [%y]\n");
-    // printf("Expected: Test format invalide: []\n"); // Rien n'est imprimé pour %y (invalide)
-    // printf("Returned count: %d\n\n", count);
+    // ft_printf("%%\n");
 
     return 0;
 }
