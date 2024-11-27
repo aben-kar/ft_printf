@@ -121,17 +121,18 @@ int main() {
     //ft_printf("%s", NULL);
 
     // Test %p - Affichage de pointeur
-    int i = -16;
-    ft_printf("%p\n", &i);
-    printf("%p", &i);
+    // int i = -16;
+    // ft_printf("%p\n", &i);
+    // printf("%p", &i);
 
     // // Test %d et %i - Entiers signés
     // int j = 1242;
     // ft_printf("%i\n", j);
 
-    // Test %u - Entiers non signés
-    // int k = 4294967295;
-    // ft_printf("%u", k);
+    //Test %u - Entiers non signés
+    long k = -4294967295;
+    ft_printf("%u", k);
+    printf("%u", k);
 
     // // Test %x et %X - Hexadécimal
     // int hex = 255;

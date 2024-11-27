@@ -12,5 +12,8 @@ int ft_putnbr(long nb);
 int ft_putstr(char *str);
 int ft_puthex(char c, int n);
 int check_address(unsigned long n);
+int	ft_putunbr(unsigned int n);
+int ft_putaddr(unsigned long n);
+int ft_printf(const char *format, ...);
 
 #endif
