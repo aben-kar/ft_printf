@@ -15,5 +15,8 @@ int check_address(unsigned long n);
 int	ft_putunbr(unsigned int n);
 int ft_putaddr(unsigned long n);
 int ft_printf(const char *format, ...);
+char	*ft_strchr(const char *str, int c);
+int check_fromat(char f);
+int ft_format(va_list args, char c);
 
 #endif

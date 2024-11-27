@@ -19,7 +19,8 @@ int ft_putstr(char *str)
         i++;
     }
     return len;
-}char	*ft_strchr(const char *str, int c)
+}
+char	*ft_strchr(const char *str, int c)
 {
 	if (!str)
 		return (NULL);
