@@ -38,7 +38,7 @@ int check_fromat(char f)
 {
     char *find;
 
-    find = "csdiupxX%";
+    find = "csdixXup%";
     if (ft_strchr(find, f))
         return (1);
     return (0);

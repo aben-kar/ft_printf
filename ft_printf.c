@@ -47,11 +47,11 @@ int ft_printf(const char *format, ...)
 
 int main()
 {
-    // char *str = "achraf pentoura";
-    // int x = 5;
-    // int *ptr = &x;
-    // ft_printf("%d\n", ft_printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
-    // printf("%d", printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
+    char *str = "achraf pentoura";
+    int x = 5;
+    int *ptr = &x;
+    ft_printf("%d\n", ft_printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
+    printf("%d", printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
 
     // int i = 255;
     // ft_printf ("%p\n", &i);
