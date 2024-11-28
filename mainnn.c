@@ -1,55 +1,192 @@
-#include "libftprintf.h"
+#include <stdio.h>
+#include <stdarg.h>
+#include <limits.h>
+#include <unistd.h>
 
-int ft_format(va_list args, char c)
+char	*ft_strchr(const char *str, int c)
 {
-    int count;
-
-    count = 0;
-    if (c == 'c')
-        count += ft_putchar(va_arg(args, int));
-    else if (c == 's')
-        count += ft_putstr(va_arg(args, char *));
-    else if (c == 'd' || c == 'i')
-        count += ft_putnbr(va_arg(args, int));
-    else if (c == 'x' || c == 'X')
-        count += ft_puthex(c, va_arg(args, int));
-    else if (c == 'p')
-        count += check_address((unsigned long)va_arg(args, void *));
-    else if(c == 'u')
-        count += ft_putunbr(va_arg(args, unsigned int));
-    else
-        count += ft_putchar('%');
-    return (count);
+	while (str && *str)
+	{
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
+	}
+	if (*str == '\0' && (char)c == '\0')
+		return ((char *)str);
+	return (NULL);
 }
-int ft_printf(const char *format, ...)
-{
-    va_list argss;
-    if (!format)
-        return (-1);
-    va_start(argss, format);
-    int count;
 
-    count = 0;
-    while (*format)
-    {
-        if (*format == '%' && check_fromat(*(format + 1)))
-        {
-            format++;
-            count += ft_format(argss, *format);
-        }
-        else
-            count += ft_putchar(*format);
-        format++;
-    }
-    va_end(argss);
-    return (count);
+int	ft_strlen(char *s)
+{
+	int	count;
+
+	count = 0;
+	if (!s)
+		return (0);
+	while (*s)
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
+
+int	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+int	check_format(char c)
+{
+	char	*flags;
+
+	flags = "cspdiuxX%";
+	if (ft_strchr(flags, c))
+		return (1);
+	return (0);
+}
+
+int	ft_putunbr(unsigned int n)
+{
+	int	count;
+
+	count = 0;
+	if (n > 9)
+		count += ft_putnbr(n / 10);
+	count += ft_putchar(n % 10 + '0');
+	return (count);
+}
+
+int	ft_putstr(char *s)
+{
+	int	count;
+
+	count = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
+	count = ft_strlen(s);
+	while (*s)
+	{
+		write(1, s, 1);
+		s++;
+	}
+	return (count);
+}
+
+int	ft_puthexa(unsigned int nb, char c)
+{
+	char	*hexa;
+	int		count;
+
+	count = 0;
+	if (c == 'x')
+		hexa = "0123456789abcdef";
+	else
+		hexa = "0123456789ABCDEF";
+	if (nb > 15)
+		count += ft_puthexa(nb / 16, c);
+	count += ft_putchar(hexa[nb % 16]);
+	return (count);
+}
+
+int	ft_putadr(unsigned long n)
+{
+	char	*ptr;
+	int		count;
+
+	count = 0;
+	ptr = "0123456789abcdef";
+	if (n > 15)
+		count += ft_putadr(n / 16);
+	count += ft_putchar(ptr[n % 16]);
+	return (count);
+}
+
+int	check_pointer(unsigned long n)
+{
+	int				count;
+	unsigned long	nb;
+
+	nb = n;
+	count = 0;
+	if ((void *)nb == (void *)0)
+		return (ft_putstr("0x0"));
+	count += ft_putstr("0x");
+	return (count += ft_putadr(nb));
+}
+
+int	ft_putnbr(long nb)
+{
+	int	count;
+
+	count = 0;
+	if (nb < 0)
+	{
+		count += ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb > 9)
+		count += ft_putnbr(nb / 10);
+	count += ft_putchar(nb % 10 + '0');
+	return (count);
+}
+
+
+int	ft_process_args(va_list arg, char c)
+{
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count = ft_putchar(va_arg(arg, int));
+	else if (c == 's')
+	{
+		count = ft_putstr(va_arg(arg, char *));
+	}
+	else if (c == 'p')
+	{
+		count += check_pointer(va_arg(arg, unsigned long));
+	}
+	else if (c == 'd' || c == 'i')
+		count = ft_putnbr(va_arg(arg, int));
+	else if (c == 'u')
+		count = ft_putunbr(va_arg(arg, unsigned int));
+	else if (c == 'x' || c == 'X')
+		count = ft_puthexa(va_arg(arg, unsigned int), c);
+	else
+		count = ft_putchar('%');
+	return (count);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	arg;
+	int		count;
+
+	count = 0;
+	if (!format)
+		return (-1);
+	va_start(arg, format);
+	while (*format)
+	{
+		if (*format == '%' && check_format(*(format + 1)))
+		{
+			format++;
+			count += ft_process_args(arg, *format);
+		}
+		else
+			count += ft_putchar(*format);
+		if (!(*format))
+			break ;
+		format++;
+	}
+	va_end(arg);
+	return (count);
 }
 
 int main (void)
 {
-    
-    printf("a %");
-	// char 			c = 'a';
+    printf("a % b\n");	// char 			c = 'a';
 	// char 			s[] = "TESST 1337 42 smaurai0lava";
 	// int 			max = 2147483647;
 	// int 			min = -2147483648;
@@ -106,16 +243,3 @@ int main (void)
 	// printf("my printf :           %d\n", nbr);
 	// printf("original printf :     %d\n", num);
 }
-
-// int main()
-// {
-//     // char *str = "achraf pentoura";
-//     // int x = 5;
-//     // int *ptr = &x;
-//     // ft_printf("%d\n", ft_printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
-//     // printf("%d", printf("%c - %s - %p - %d - %i - %u - %x - %X\n",49,  str, ptr, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
-
-//     int i = 255;
-//     ft_printf ("%p hh\n", &i);
-//     printf ("%%d %p hh\n", &i);
-// }
