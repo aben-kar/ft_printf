@@ -16,6 +16,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJS)
 	ar rcs $@ $^
+	make clean
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^ -o $@

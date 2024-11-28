@@ -1,9 +1,22 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/28 11:57:27 by acben-ka          #+#    #+#             */
+/*   Updated: 2024/11/28 12:07:44 by acben-ka         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int ft_putchar(char c)
 {
-    return (write (1, &c, 1));
+    return (write(1, &c, 1));
 }
+
 int ft_putstr(char *str)
 {
     int i;
@@ -15,26 +28,28 @@ int ft_putstr(char *str)
     len = 0;
     while (str[i])
     {
-        len += write (1, &str[i], 1);
+        len += write(1, &str[i], 1);
         i++;
     }
-    return len;
+    return (len);
 }
-char	*ft_strchr(const char *str, int c)
+
+char *ft_strchr(const char *str, int c)
 {
-	if (!str)
-		return (NULL);
-	while (*str)
-	{
-		if ((char)c == *str)
-			return ((char *)str);
-		str++;
-	}
-	if ((char)c == '\0')
-		return ((char *)str);
-	return (NULL);
+    if (!str)
+        return (NULL);
+    while (*str)
+    {
+        if ((char)c == *str)
+            return ((char *)str);
+        str++;
+    }
+    if ((char)c == '\0')
+        return ((char *)str);
+    return (NULL);
 }
-int check_fromat(char f)
+
+int check_format(char f)
 {
     char *find;
 
