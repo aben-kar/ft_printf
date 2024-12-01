@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:18:15 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/11/28 20:26:31 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:00:10 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (count);
-}
-int main()
-{
-	ft_printf("%d\n", ft_printf("%c%s%p%d%i%u%x%X%", 48, "hello", (void *)0, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
-	printf("%d\n", printf("%c%s%p%d%i%u%x%X%", 48, "hello", (void *)0, INT_MAX, INT_MIN, UINT_MAX, 42, 42));
 }
